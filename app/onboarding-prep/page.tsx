@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Sidebar } from '@/components/Sidebar';
+import { Header } from '@/components/Header';
 
 interface OnboardingData {
   newbieeName: string;
@@ -64,8 +66,11 @@ export default function OnboardingPrep() {
   };
 
   return (
-    <div style={{ padding: '0', minHeight: '100vh', background: 'var(--bg)' }}>
-      <header style={{ background: 'var(--card)', padding: '20px 24px', borderBottom: '1px solid var(--line)' }}>
+    <div className="app">
+      <Sidebar />
+      <div className="main">
+      <Header />
+      <section style={{ background: 'var(--card)', padding: '20px 24px', borderBottom: '1px solid var(--line)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h1 style={{ margin: '0 0 8px 0', color: 'var(--ink)', fontSize: '24px', fontWeight: 700 }}>
             🎉 온보딩 준비하기
@@ -74,10 +79,10 @@ export default function OnboardingPrep() {
             선임이 신입 멤버의 정보를 미리 준비하세요
           </p>
         </div>
-      </header>
+      </section>
 
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', alignItems: 'start' }}>
           {/* 입력 폼 */}
           <div
             style={{
@@ -404,6 +409,7 @@ export default function OnboardingPrep() {
           </Link>
         </div>
       </main>
+      </div>
     </div>
   );
 }

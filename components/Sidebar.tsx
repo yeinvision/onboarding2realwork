@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { JSX } from 'react';
 
 const navigation = [
@@ -88,12 +88,23 @@ export function Sidebar() {
     setIsOpen(!isOpen);
   };
 
+  // 메뉴가 열려 있을 때 Esc 키로 닫기
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen]);
+
   return (
     <>
       <button
         className="menu-btn"
         onClick={toggleSidebar}
-        aria-label="메뉴 열기"
+        aria-label={isOpen ? '메뉴 닫기' : '메뉴 열기'}
+        aria-expanded={isOpen}
       >
         <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -108,8 +119,8 @@ export function Sidebar() {
             <Image 
               src="/realwork-logo.png" 
               alt="RealWork 로고" 
-              width={32}
-              height={32}
+              width={216}
+              height={78}
               priority
             />
           </div>
@@ -141,13 +152,8 @@ export function Sidebar() {
 
       {isOpen && (
         <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 50,
-            display: 'none',
-          }}
+          className="side-overlay"
+          aria-hidden="true"
           onClick={() => setIsOpen(false)}
         />
       )}

@@ -1,6 +1,8 @@
 ﻿'use client';
 
 import Link from 'next/link';
+import { Sidebar } from '@/components/Sidebar';
+import { Header } from '@/components/Header';
 
 const cultureItems = [
   {
@@ -67,8 +69,11 @@ const cultureItems = [
 
 export default function Culture() {
   return (
-    <div style={{ padding: '0', minHeight: '100vh', background: 'var(--bg)' }}>
-      <header style={{ background: 'var(--card)', padding: '20px 24px', borderBottom: '1px solid var(--line)' }}>
+    <div className="app">
+      <Sidebar />
+      <div className="main">
+      <Header />
+      <section style={{ background: 'var(--card)', padding: '20px 24px', borderBottom: '1px solid var(--line)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h1 style={{ margin: '0 0 8px 0', color: 'var(--ink)', fontSize: '24px', fontWeight: 700 }}>
             🌟 리얼워크 문화
@@ -77,7 +82,7 @@ export default function Culture() {
             리얼워크를 만드는 핵심 가치들을 만나보세요
           </p>
         </div>
-      </header>
+      </section>
 
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
         {/* 소개 섹션 */}
@@ -251,6 +256,7 @@ export default function Culture() {
           </Link>
         </div>
       </main>
+      </div>
     </div>
   );
 }
